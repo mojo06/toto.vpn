@@ -15,16 +15,16 @@ from .watcher import Watcher
 
 
 if __name__ == '__main__':
-   logger = logging.getLogger('watcher')
-   try:
-      config = configuration.read_config()
-      logger.debug("Configuration: %s" % config)
-   except Exception as e:
-      logger.error('Failed to load configuration: %s' % e)
-      
-   DBusGMainLoop(set_as_default=True)
-   bus = dbus.SessionBus();
-   bus_name = dbus.service.BusName(DBUS_SVC_NAME_WATCHER, bus=bus)
-   watcher = Watcher(bus_name, DBUS_OBJ_PATH_WATCHER, config)
-   loop = gobject.MainLoop()
-   loop.run()
+	logger = logging.getLogger('watcher')
+	try:
+		config = configuration.read_config()
+		logger.debug("Configuration: %s" % config)
+	except Exception as e:
+		logger.error('Failed to load configuration: %s' % e)
+		
+	DBusGMainLoop(set_as_default=True)
+	bus = dbus.SessionBus();
+	bus_name = dbus.service.BusName(DBUS_SVC_NAME_WATCHER, bus=bus)
+	watcher = Watcher(bus_name, DBUS_OBJ_PATH_WATCHER, config)
+	loop = gobject.MainLoop()
+	loop.run()
